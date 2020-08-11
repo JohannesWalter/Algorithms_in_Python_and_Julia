@@ -48,7 +48,7 @@ def run_linear_regression(data_x, data_y):
     :return         : feature for line of best fit (feature vector)
     """
 
-    iterations = 100000
+    iterations = 1000000
     alpha = 0.0001550
 
     no_features = data_x.shape[1]

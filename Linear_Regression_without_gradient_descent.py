@@ -1,6 +1,7 @@
 import numpy as np
 import requests
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 
 
 def collect_dataset():
@@ -35,3 +36,7 @@ x_prime_x=np.dot(x.transpose(), x)
 xx_to_minusone=np.linalg.inv(x_prime_x)
 x_prime_y=np.dot(x.transpose(), y)
 beta_hat=np.dot(xx_to_minusone, x_prime_y)
+
+reg=LinearRegression().fit(x, y)
+reg.coef_  # 1.6076036
+reg.intercept_  # -15.54790166
