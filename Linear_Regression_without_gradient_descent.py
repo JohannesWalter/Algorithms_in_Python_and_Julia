@@ -26,17 +26,17 @@ def collect_dataset():
     return dataset
 
 
-data = collect_dataset())
-x=np.c_[np.ones(len_data), data[:, :-1]].astype(float)
-y=data[:, -1].astype(float)
+data = collect_dataset()
+x = np.c_[np.ones(len_data), data[:, :-1]].astype(float)
+y = data[:, -1].astype(float)
 
 # OLS formula: beta_hat = ((X'X)^-1)X'Y
 
-x_prime_x=np.dot(x.transpose(), x)
-xx_to_minusone=np.linalg.inv(x_prime_x)
-x_prime_y=np.dot(x.transpose(), y)
-beta_hat=np.dot(xx_to_minusone, x_prime_y)
+x_prime_x = np.dot(x.transpose(), x)
+xx_to_minusone = np.linalg.inv(x_prime_x)
+x_prime_y = np.dot(x.transpose(), y)
+beta_hat = np.dot(xx_to_minusone, x_prime_y)
 
-reg=LinearRegression().fit(x, y)
+reg = LinearRegression().fit(x, y)
 reg.coef_  # 1.6076036
 reg.intercept_  # -15.54790166
