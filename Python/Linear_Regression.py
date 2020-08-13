@@ -37,6 +37,7 @@ def collect_dataset():
         item = item.split(",")
         data.append(item)
     data.pop(0)  # to remove the label from the list
+    dataset = np.matrix(data)
     return dataset
 
 

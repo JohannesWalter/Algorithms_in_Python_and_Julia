@@ -7,63 +7,26 @@ This is my implementation of Linear Regression in Julia =#
 
 using Pkg 
 # Pkg.add("HTTP")
-Pkg.add("DataFrames")
+# Pkg.add("DataFrames")
 using HTTP
 using DataFrames
-
+using LinearAlgebra
 
 
 
 response = HTTP.request("GET", "https://raw.githubusercontent.com/yashLadha/The_Math_of_Intelligence/master/Week1/ADRvsRating.csv")
 
-
 r = String(response.body)
 
 lines = split(r, "\n")
-
-
 data = []
-
-
-lines = lines[2:length(lines)]
-
-lines[1]
-split(lines[1], ",")
-test = ["one, two", "three, four"]
-typeof(test)
-typeof(lines)
-test[1]
-lines[1]
-
-
-
-
-splitted_line = split(lines[1], ",")
-splitted_line
-splitted_line[1]
-typeof(Tuple(splitted_line))
-typeof(splitted_line[1])
-
-z = 1, 2
-typeof(z)
-
 
 for i in 1:length(lines)
     i = split(lines[i], ",")
     append!(data, i)
 end
 
-typeof(lines)
-typeof(data)
-typeof(data[1])
-
-1 % 2
-
-
-
-
-
-
+data = data[3:length(data) - 1]
 
 X = []
 Y = []
@@ -77,5 +40,19 @@ for i in 1:length(data)
     end
 end
 
-df = DataFrame(X=X, Y=Y)
+# df = DataFrame(X=X, Y=Y)
+
+on1s = ones(1, length(df.X))
+X = convert(Array{Float64}, X)
+features = [transpose(on1s) X]
+outcome = convert(Array{Float64}, Y)
+
+# Calculate the regression parameters
+# OLS formula: beta_hat = ((X'X)^-1)X'Y
+
+x_prime_x = transpose(features) * features
+xx_to_minusone = inv(x_prime_x)
+x_prime_y = transpose(features) * Y
+beta_hat = xx_to_minusone * x_prime_y
+
 

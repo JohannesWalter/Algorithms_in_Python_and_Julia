@@ -23,10 +23,12 @@ def collect_dataset():
         item = item.split(",")
         data.append(item)
     data.pop(0)  # to remove the label from the list
-    return dataset
+    dataset = np.matrix(data)
+    return data
 
 
 data = collect_dataset()
+len_data = data.shape[0]
 x = np.c_[np.ones(len_data), data[:, :-1]].astype(float)
 y = data[:, -1].astype(float)
 
