@@ -11,6 +11,9 @@ Pkg.add("DataFrames")
 using HTTP
 using DataFrames
 
+
+
+
 response = HTTP.request("GET", "https://raw.githubusercontent.com/yashLadha/The_Math_of_Intelligence/master/Week1/ADRvsRating.csv")
 
 
